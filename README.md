@@ -17,10 +17,12 @@ Steve’s parents initially wanted to invest in DAQO (DQ) stock. An analysis was
 ### All Stocks Analysis
 The first iteration of analyzing the 12 stocks for the years 2017 and 2018 provided promising results for Steve to choose a stock to invest in (see analysis results below). 
 
-    *All Stocks Analysis (2017)*
+*All Stocks Analysis (2017)*
+
 ![Screen Shot 2021-12-02 at 8 40 21 PM](https://user-images.githubusercontent.com/94259442/144536542-d78a12d3-68fd-47bb-ae68-2db5b643b8ab.png)
 
-    *All Stocks Analysis (2018)*
+*All Stocks Analysis (2018)*
+
 ![Screen Shot 2021-12-02 at 8 40 40 PM](https://user-images.githubusercontent.com/94259442/144537065-4d00b4b5-37ab-4c87-82b8-cd668b332bf0.png)
 
 However, as Steve began to think of future uses for this workbook, it was decided that the code should be refactored to make the analyses more efficient.
@@ -46,10 +48,12 @@ Refer to the **Code** subsection to view the initial code compared to the refact
 
 After the code was refactored, it can be noted that the run time is faster at 0.078125 seconds and 0.078125 seconds for 2017 and 2018, respectively. 
 
-  *All Stocks Analysis (2017) - New Run Time*
+*All Stocks Analysis (2017) - New Run Time*
+
 <img width="274" alt="VBA_Challenge_2017" src="https://user-images.githubusercontent.com/94259442/144537650-1ad8e008-994f-4d2f-b878-c08b92222b47.png">
 
-  *All Stocks Analysis (2018) - New Run Time*
+*All Stocks Analysis (2018) - New Run Time*
+
 <img width="277" alt="VBA_Challenge_2018" src="https://user-images.githubusercontent.com/94259442/144537657-1c67082d-c6a2-496e-8830-160940b431c1.png">
 
 
@@ -59,12 +63,13 @@ It is difficult to say if the time required to refactor this VBA code was justif
 
 ## Code
 ### Initial Code
-'Sub AllStocksAnalysis()
-' Activate the sheet where we want to place the returned data
+'
+Sub AllStocksAnalysis()
+'Activate the sheet where we want to place the returned data
 Worksheets("All Stocks Analysis").Activate
     
-' Set formatting/variable naming conventions
-    ' Create headers
+'Set formatting/variable naming conventions
+    'Create headers
     Cells(3, 1).Value = "Ticker"
     Cells(3, 2).Value = "Total Daily Volume"
     Cells(3, 3).Value = "Return"
@@ -115,18 +120,18 @@ Loop Until wsExists = True
         tickers(10) = "TERP"
         tickers(11) = "VSLR"
         
-    ' Determine start/end of DQ data and use the data accordingly
+    'Determine start/end of DQ data and use the data accordingly
     Dim StartingPrice As Single
     Dim EndingPrice As Single
     
-' Activate the sheet from which we will run our analysis
+'Activate the sheet from which we will run our analysis
 Worksheets(YearValue).Activate
-    ' note that we don't have to use Dim because we are assigning specific values. Could use Dim; would need to if only assigning as a variable without value here.
+    'note that we don't have to use Dim because we are assigning specific values. Could use Dim; would need to if only assigning as a variable without value here.
     RowStart = 2
     'rowEnd code taken from https://stackoverflow.com/questions/18088729/row-count-where-data-exists
     RowEnd = Cells(Rows.Count, "A").End(xlUp).Row
 
-    ' loop through the tickers
+    'loop through the tickers
     For i = 0 To 11
         Ticker = tickers(i)
         'move total volume inside so that it resets for each ticker
@@ -136,7 +141,7 @@ Worksheets(YearValue).Activate
             Worksheets(YearValue).Activate
         
             For j = RowStart To RowEnd
-                ' If the cell value is equal to the ticker array
+                'If the cell value is equal to the ticker array
                 If Cells(j, 1).Value = Ticker Then 'then set the total volume for the ticker to previous total volume plus the new volume of that ticker cell
                     TotalVolume = TotalVolume + Cells(j, 8).Value
                 End If
@@ -151,11 +156,11 @@ Worksheets(YearValue).Activate
                 
             Next j
         
-    ' Return back to the worksheet where we're placing data and include the updates inside the loop so that it changes for each i.
+    'Return back to the worksheet where we're placing data and include the updates inside the loop so that it changes for each i.
     Worksheets("All Stocks Analysis").Activate
     Cells(4 + i, 1).Value = Ticker
     Cells(4 + i, 2).Value = TotalVolume
-        ' this is the yearly return calculation
+        'this is the yearly return calculation
     Cells(4 + i, 3).Value = (EndingPrice / StartingPrice) - 1
     
         'Color formatting
@@ -179,6 +184,7 @@ Worksheets(YearValue).Activate
     MsgBox "This code ran in " & Format((EndTime - StartTime), "#,##0.0000") & " seconds for the year " & (YearValue) & "."
     
 End Sub
+
 '
 
 ### Refactored Code
