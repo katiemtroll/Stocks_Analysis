@@ -63,7 +63,7 @@ It is difficult to say if the time required to refactor this VBA code was justif
 
 ## Code
 ### Initial Code
-'
+`
 Sub AllStocksAnalysis()
 'Activate the sheet where we want to place the returned data
 Worksheets("All Stocks Analysis").Activate
@@ -184,11 +184,10 @@ Worksheets(YearValue).Activate
     MsgBox "This code ran in " & Format((EndTime - StartTime), "#,##0.0000") & " seconds for the year " & (YearValue) & "."
     
 End Sub
-
-'
+`
 
 ### Refactored Code
-'
+`
 Sub AllStocksAnalysisRefactored()
 
     Dim StartTime As Single
@@ -318,4 +317,4 @@ Sub AllStocksAnalysisRefactored()
     MsgBox ("The refactored code ran in " & (EndTime - StartTime) & " seconds for the year " & (YearValue) & "." & Chr(10) & "To run this analysis again,select the 'Run Analysis' button.")
 
 End Sub
-'
+`
